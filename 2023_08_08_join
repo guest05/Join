@@ -1,0 +1,52 @@
+create database 2023_08_08_inner_join;
+use 2023_08_08_inner_join;
+
+create table pedido
+(
+pedido_id int,
+cliente_id int,
+funcionario_id int,
+data_de_pedido date,
+entregador_id int
+);
+
+insert into pedido (pedido_id, cliente_id, funcionario_id, data_de_pedido, entregador_id)
+values (10308, 2, 7, "1996-09-18", 3);
+
+insert into pedido (pedido_id, cliente_id, funcionario_id, data_de_pedido, entregador_id)
+values (10309, 37, 3, "1996-09-19", 1);
+
+insert into pedido (pedido_id, cliente_id, funcionario_id, data_de_pedido, entregador_id)
+values (10310, 77, 8, "1996-09-20", 2);
+
+create table cliente
+(
+cliente_id int,
+cliente_nome varchar (255),
+cliente_contato varchar (255),
+endereco varchar (255),
+cidade varchar (255),
+codigo_postal varchar (5),
+pais varchar (255)
+);
+
+insert into cliente (cliente_id, cliente_nome, cliente_contato, endereco, cidade, codigo_postal, pais)
+values (1, "Alfreds Futterkiste", "Maria Anders", "Obere Str. 57", "Berlim", "12209", "Alemanha");
+
+insert into cliente (cliente_id, cliente_nome, cliente_contato, endereco, cidade, codigo_postal, pais)
+values (2, "Ana Trujillo Emparedados y helados", "Ana Trujillo", "Avda. de la Constitución 2222", "México D.F.", "05021", "México");
+
+insert into cliente (cliente_id, cliente_nome, cliente_contato, endereco, cidade, codigo_postal, pais)
+values (3, "Antonio Moreno Taquería", "Antonio Moreno", "Mataderos 2312", "México D.F.", "05023", "México");
+
+select pedido.pedido_id, pedido.cliente_id, pedido.funcionario_id, pedido.data_de_pedido, pedido.entregador_id, cliente.cliente_id, cliente.cliente_nome, cliente.cliente_contato, cliente.endereco, cliente.cidade, cliente.codigo_postal, cliente.pais
+from pedido
+inner join cliente on pedido.cliente_id = cliente.cliente_id;
+
+select pedido.pedido_id, pedido.cliente_id, pedido.funcionario_id, pedido.data_de_pedido, pedido.entregador_id, cliente.cliente_id, cliente.cliente_nome, cliente.cliente_contato, cliente.endereco, cliente.cidade, cliente.codigo_postal, cliente.pais
+from pedido
+left join cliente on pedido.cliente_id = cliente.cliente_id;
+
+select pedido.pedido_id, pedido.cliente_id, pedido.funcionario_id, pedido.data_de_pedido, pedido.entregador_id, cliente.cliente_id, cliente.cliente_nome, cliente.cliente_contato, cliente.endereco, cliente.cidade, cliente.codigo_postal, cliente.pais
+from pedido
+right join cliente on pedido.cliente_id = cliente.cliente_id
